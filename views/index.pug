@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  if posts
+   each post, i in posts
+    .post
+     h1
+      - var post1 = post._id
+      a(href='/posts/show/'+post1)
+       =post.title
+     p.meta Posted in 
+      - var category1 = post.category
+      a(href='/categories/show/'+ category1) #{post.category} 
+      by #{post.author} 
+      on #{moment(post.date).format("MM-DD-YYYY")}
+     - var imageurl = post.mainimage
+     img(src='/images/'+imageurl)
+     !=truncateText(post.body,400)
+     -var postio = post._id
+     a.more(href='/posts/show/'+postio) Read More
